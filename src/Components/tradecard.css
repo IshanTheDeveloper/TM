@@ -1,0 +1,36 @@
+.card-image img {
+  width: 8vw;
+  border-radius: 1rem;
+}
+.trade-card-status img {
+  width: 1vw;
+}
+.trade-card {
+  padding-left: 2vw;
+  display: flex;
+  gap: 1vw;
+  margin-top: 2vh;
+}
+.trade-card-details {
+  display: flex;
+  gap: 2vw;
+  width: 26vw;
+  flex-direction: column;
+}
+.trade-card-status div:nth-of-type(1) p:nth-of-type(1) {
+  color: green;
+}
+.trade-card-status {
+  width: 10vw;
+  display: flex;
+  flex-direction: column;
+  gap: 4vw;
+}
+.trade-card-status div:nth-of-type(2) {
+  display: flex;
+}
+.trade-card-description {
+  width: 25vw;
+  height: 11vh;
+  overflow: hidden;
+}

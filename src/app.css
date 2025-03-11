@@ -1,0 +1,83 @@
+.tradeCards {
+  display: flex;
+  margin-top: 2vh;
+}
+.tradeCards2 {
+  width: 25vw;
+  margin-left: 3vw;
+}
+.status-container1 {
+  width: 17vw;
+  box-shadow: 0 0 3px 3px rgb(128, 128, 128, 0.5);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+.status-container1 button {
+  border: none;
+  padding: 0.3rem;
+  margin-left: 9px;
+  margin-top: 1vh;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1px 1px grey;
+}
+
+.status-container2 {
+  border-radius: 0.5rem;
+  width: 17vw;
+  height: 40vh;
+  margin-top: 2vh;
+  padding: 0.5rem;
+  box-shadow: 0 0 3px 3px rgb(128, 128, 128, 0.5);
+}
+.search-in-result p {
+  font-size: 0.9rem;
+  margin-top: 0.5vh;
+}
+.status-container2 input {
+  border: 1px solid grey;
+  width: 90%;
+  padding: 0.4rem;
+  margin-top: 1vh;
+  border-radius: 0.5rem;
+}
+.status-container-buttons {
+  display: flex;
+  gap: 1vw;
+}
+.status-container-buttons button {
+  font-weight: 600;
+  background-color: white;
+  border: none;
+  &:hover {
+    cursor: pointer;
+    border-bottom: 3px solid black;
+  }
+}
+
+.display {
+  width: 17vw;
+  padding: 0.5rem;
+  margin-top: 2vh;
+  box-shadow: 0 0 3px 3px rgb(128, 128, 128, 0.5);
+  border-radius: 0.5rem;
+}
+.search-in-result {
+  margin-top: 3vh;
+}
+.search-in-result span {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.display p {
+  display: flex;
+  justify-content: center;
+  gap: 2vw;
+  background-color: rgb(128, 128, 128, 0.1);
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+.display button {
+  background-color: none;
+  border: none;
+  padding: 0.3rem;
+}
