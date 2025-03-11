@@ -148,6 +148,15 @@
   border-radius: 1rem;
   padding: 0.5rem;
 }
+.trade-card-heading {
+  display: flex;
+  gap: 17vw;
+  margin-left: 4vw;
+}
+.trade-card-heading h2 {
+  font-size: 1.1vw;
+  font-weight: 400;
+}
 .display button {
   background-color: none;
   border: none;

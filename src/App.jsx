@@ -128,6 +128,14 @@ function App() {
       </div>
 
       <Navbar />
+
+      <div className="trade-card-heading">
+        <h2>Mark</h2>
+        <h2>Details</h2>
+        <h2>Status</h2>
+        <h2>Class/Description</h2>
+      </div>
+      <hr />
       <div className="tradeCards">
         <div className="tradeCards1">
           {filteredHits.length > 0 ? (
