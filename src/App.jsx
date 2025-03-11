@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Header from "./Components/Header/header";
 import Navbar from "./Components/Navbar/navbar";
 import TradeCard from "./Components/tradeCard";
 import "./app.css";
@@ -122,6 +121,9 @@ function App() {
         </div>
         <div className="search-button">
           <button onClick={handleSearch}>Search</button>
+        </div>
+        <div className="apply-button">
+          <button>Apply for Trademark</button>
         </div>
       </div>
 
