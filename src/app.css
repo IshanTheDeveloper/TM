@@ -139,7 +139,7 @@
 .search-in-result span {
   font-weight: 600;
   font-size: 0.95rem;
-  margin: 1vh;
+  margin-bottom: 2vh;
 }
 .display p {
   display: flex;
