@@ -48,6 +48,8 @@ function App() {
         }
 
         const result = await response.json();
+        console.log("API Response:", result?.body?.hits?.hits); // Debugging
+
         setData(result);
         setHits(result?.body?.hits?.hits || []);
         setFilteredHits(result?.body?.hits?.hits || []);
@@ -59,7 +61,7 @@ function App() {
     fetchData();
   }, []);
 
-  // Date formatting function
+  // ✅ Date formatting function
   const formatDate = (dateString) => {
     if (!dateString) return "N/A"; // Handle empty or invalid date
     const date = new Date(dateString);
@@ -158,12 +160,20 @@ function App() {
                 owner={hit._source.current_owner}
                 lawfirm={hit._source.law_firm}
                 tradeId={hit._id}
-                tradeDate={formatDate(hit._source.filling_date)}
+                tradeDate={formatDate(
+                  hit._source.filling_date || // Corrected field
+                    hit._source.filing_date || // Fallback if typo
+                    hit._source.application_date // Additional fallback
+                )}
                 status={hit._source.status_type}
                 statusDate={formatDate(hit._source.status_date)}
                 renewalDate={formatDate(hit._source.renewal_date)}
-                description1={hit._source.mark_description_description[0]}
-                description2={hit._source.mark_description_description[1]}
+                description1={
+                  hit._source.mark_description_description?.[0] || "N/A"
+                }
+                description2={
+                  hit._source.mark_description_description?.[1] || "N/A"
+                }
               />
             ))
           ) : (
