@@ -59,6 +59,18 @@ function App() {
     fetchData();
   }, []);
 
+  // Date formatting function
+  const formatDate = (dateString) => {
+    if (!dateString) return "N/A"; // Handle empty or invalid date
+    const date = new Date(dateString);
+    if (isNaN(date)) return "Invalid Date";
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
   const handleSearch = () => {
     if (!searchQuery.trim()) {
       alert("Kindly write something in input to search");
@@ -146,10 +158,10 @@ function App() {
                 owner={hit._source.current_owner}
                 lawfirm={hit._source.law_firm}
                 tradeId={hit._id}
-                tradeDate={hit._source.filling_date}
+                tradeDate={formatDate(hit._source.filling_date)}
                 status={hit._source.status_type}
-                statusDate={hit._source.status_date}
-                renewalDate={hit._source.renewal_date}
+                statusDate={formatDate(hit._source.status_date)}
+                renewalDate={formatDate(hit._source.renewal_date)}
                 description1={hit._source.mark_description_description[0]}
                 description2={hit._source.mark_description_description[1]}
               />
