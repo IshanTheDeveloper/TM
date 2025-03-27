@@ -11,6 +11,7 @@ function App() {
   const [filteredHits, setFilteredHits] = useState([]);
   const [displayList, setDisplayList] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState(new Set());
+  const [listSelected, setListSelected] = useState(false); //To track button clicks
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,7 +62,7 @@ function App() {
     fetchData();
   }, []);
 
-  // ✅ Date formatting function
+  //Date formatting function
   const formatDate = (dateString) => {
     if (!dateString) return "N/A"; // Handle empty or invalid date
     const date = new Date(dateString);
@@ -102,6 +103,7 @@ function App() {
     } else if (type === "attorneys") {
       list = hits.map((hit) => hit._source.attorney_name).filter(Boolean);
     }
+    setListSelected(true); //Mark that a button has been clicked
     setDisplayList([...new Set(list)]); // Remove duplicates
   };
 
@@ -118,31 +120,39 @@ function App() {
 
   return (
     <>
-      <div className="header-container">
-        <div className="company-logo">
+      <div className="flex items-center h-[11vh] gap-[1vw] justify-center">
+        <div className="w-max pl-[5vw]">
           <img
             src="https://www.trademarkia.com/assets/images/logo_trademarkia.png"
+            className="w-[13vw] ml-[1vw]"
             alt="Image not available."
           />
         </div>
-        <div className="search-bar">
+        <div className="h-[7vh] flex justify-center items-center px-[0.8rem] pl-[0.5rem] border border-gray-500/50 rounded-md">
           <input
             type="text"
             placeholder="Search by Name, Owner, Law Firm, or Status"
             value={searchQuery}
+            className="w-[42vw] h-[5vh] border-none outline-none"
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <div className="search-button">
-          <button onClick={handleSearch}>Search</button>
+        <div>
+          <button
+            onClick={handleSearch}
+            className="bg-blue-500 text-white w-[7vw] h-[7vh] p-4 text-[1.1rem] font-semibold rounded-lg border-none hover:bg-blue-500/90 cursor-pointer"
+          >
+            Search
+          </button>
         </div>
-        <div className="apply-button">
-          <button>Apply for Trademark</button>
+        <div>
+          <button className="bg-orange-600 text-white w-[14vw] h-[7vh] p-4 text-[1.1rem] font-semibold rounded-lg border-none ml-[6vw] hover:bg-orange-600/90 cursor-pointer">
+            Apply for Trademark
+          </button>
         </div>
       </div>
-
       <Navbar />
-
+      <hr />
       <div className="trade-card-heading">
         <h2>Mark</h2>
         <h2>Details</h2>
@@ -150,7 +160,8 @@ function App() {
         <h2>Class/Description</h2>
       </div>
       <hr />
-      <div className="tradeCards">
+      <br />
+      <div className="main-trade-card">
         <div className="tradeCards1">
           {filteredHits.length > 0 ? (
             filteredHits.map((hit) => (
@@ -161,9 +172,9 @@ function App() {
                 lawfirm={hit._source.law_firm}
                 tradeId={hit._id}
                 tradeDate={formatDate(
-                  hit._source.filling_date || // Corrected field
-                    hit._source.filing_date || // Fallback if typo
-                    hit._source.application_date // Additional fallback
+                  hit._source.filling_date ||
+                    hit._source.filing_date ||
+                    hit._source.application_date
                 )}
                 status={hit._source.status_type}
                 statusDate={formatDate(hit._source.status_date)}
@@ -180,45 +191,71 @@ function App() {
             <p>No Data Found...</p>
           )}
         </div>
-        <div className="tradeCards2">
-          <div className="status-container">
-            <div className="status-container1">
-              <h2>Status</h2>
-              <button>All</button>
-              <button>🟢 Registered</button>
-              <button>🟡 Pending</button>
-              <button>🔴 Abandoned</button>
-              <button>🔵 Others</button>
+        <div className="w-[30vw] flex justify-center">
+          <div className="flex flex-col gap-4 h-[600px]">
+            <div className="w-[19vw] h-[8vw] shadow-[0_0_3px_3px_rgb(128,128,128,0.5)] p-8 rounded-md">
+              <pre>
+                <h2 className="font-semibold"> Status</h2>
+              </pre>
+              <button className="button">All</button>
+              <button className="button">🟢 Registered</button>
+              <button className="button">🟡 Pending</button>
+              <button className="button">🔴 Abandoned</button>
+              <button className="button">🔵 Others</button>
             </div>
-            <div className="status-container2">
-              <div className="status-container-buttons">
-                <button onClick={() => handleDisplayClick("owners")}>
+            <div className="w-[19vw] h-[39vh] mt-[2vh] p-2 shadow-[0_0_3px_3px_rgb(128,128,128,0.5)] rounded-md">
+              <div className="flex gap-[1vw]">
+                <button
+                  onClick={() => handleDisplayClick("owners")}
+                  className="status-btn"
+                >
                   Owner
                 </button>
-                <button onClick={() => handleDisplayClick("lawfirms")}>
+                <button
+                  onClick={() => handleDisplayClick("lawfirms")}
+                  className="status-btn"
+                >
                   Law Firms
                 </button>
-                <button onClick={() => handleDisplayClick("attorneys")}>
+                <button
+                  onClick={() => handleDisplayClick("attorneys")}
+                  className="status-btn"
+                >
                   Attorneys
                 </button>
               </div>
-              <div className="search-in-result">
-                {displayList.map((item, index) => (
-                  <div key={index}>
-                    <span
-                      onClick={() => handleFilterClick(item)}
-                      style={{ cursor: "pointer", color: "black" }}
-                    >
-                      {item}
-                    </span>
-                  </div>
-                ))}
+              <hr />
+              <br />
+              <div className="mt-[3vh]">
+                {listSelected ? (
+                  displayList.length > 0 ? (
+                    displayList.map((item, index) => (
+                      <div key={index}>
+                        <span
+                          onClick={() => handleFilterClick(item)}
+                          className="firm-name"
+                          style={{ cursor: "pointer" }}
+                        >
+                          {item}
+                        </span>
+                      </div>
+                    ))
+                  ) : (
+                    <p>Nothing to show</p>
+                  )
+                ) : (
+                  <p className="flex justify-center items-center h-[27vh] text-[1rem] font-bold text-gray-400">
+                    {`"No data Click on any option to see"`}
+                  </p>
+                )}
               </div>
             </div>
-            <div className="display">
-              <h2>Display</h2>
-              <button>Grid View</button>
-              <button>List View</button>
+            <div className="w-[19vw] p-2 mt-[2vh] shadow-[0_0_3px_3px_rgb(128,128,128,0.5)] rounded-md">
+              <pre>
+                <h2 className="font-semibold"> Display</h2>
+              </pre>
+              <button className="w-[50%] bg-gray-300">Grid View</button>
+              <button className="w-[50%]  bg-gray-300">List View</button>
             </div>
           </div>
         </div>

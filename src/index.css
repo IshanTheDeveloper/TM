@@ -1,3 +1,38 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+.button {
+  border: none;
+  padding: 0.2rem;
+  margin-left: 9px;
+  margin-top: 1vh;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1px 1px grey;
+}
+
+.status-btn {
+  font-weight: 600;
+  background-color: white;
+  border: none;
+  padding: 0.2rem;
+  margin-left: 0.5vw;
+  transition: background 0.3s ease-in-out, border-bottom 0.2s ease-in-out;
+}
+
+.status-btn:hover {
+  cursor: pointer;
+  color: white;
+  border-bottom: 1px solid gray;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  background: gray;
+}
+.firm-name {
+  display: block;
+  font-weight: 500;
+  font-size: 0.8rem;
+  margin-bottom: 0.7vh;
+  margin-left: 0.5vw;
+}
+.firm-name:hover {
+  color: red;
+}

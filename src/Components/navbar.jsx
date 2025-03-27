@@ -1,6 +1,6 @@
 function Navbar() {
   return (
-    <div className="flex gap-[1vw] border-b border-gray-400/50">
+    <div className="flex gap-[1vw]  ml-[300px] w-[950px] justify-center">
       <div className="flex items-center justify-center px-2 py-1 border-b-4 border-transparent hover:border-blue-700 cursor-pointer ml-[7vw]">
         <img
           src="https://cdn-icons-png.flaticon.com/128/16548/16548756.png"
