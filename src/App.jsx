@@ -77,6 +77,7 @@ function App() {
   const handleSearch = () => {
     if (!searchQuery.trim()) {
       alert("Kindly write something in input to search");
+      window.location.reload();
       return;
     }
 
